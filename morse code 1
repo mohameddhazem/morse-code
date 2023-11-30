@@ -1,0 +1,55 @@
+morse_code_dict = {
+    "a": ".-",
+    "b": "-...",
+    "c": "-.-.",
+    "d": "-..",
+    "e": ".",
+    "f": "..-.",
+    "g": "--.",
+    "h": "....",
+    "i": "..",
+    "j": ".---",
+    "k": "-.-",
+    "l": ".-..",
+    "m": "--",
+    "n": "-.",
+    "o": "---",
+    "p": ".--.",
+    "q": "--.-",
+    "r": ".-.",
+    "s": "...",
+    "t": "-",
+    "u": "..-",
+    "v": "...-",
+    "w": ".--",
+    "x": "-..-",
+    "y": "-.--",
+    "z": "--..",
+    " ": " ",
+}
+
+def encrypt_to_morse_code(english_text):
+    morse_code = ""
+    for char in english_text:
+        morse_code += morse_code_dict[char.lower()] + " "
+    return morse_code.strip()
+
+def decrypt_from_morse_code(morse_code):
+    english_text = ""
+    morse_code_words = morse_code.split(" ")
+    for morse_code_word in morse_code_words:
+        for key, value in morse_code_dict.items():
+            if morse_code_word == value:
+                english_text += key
+    return english_text.lower()
+
+user_input = input("Enter English text to encrypt or Morse code to decrypt: ")
+
+if user_input.isalpha():
+    morse_code = encrypt_to_morse_code(user_input)
+    print("Morse code:", morse_code)
+elif user_input.isspace() or user_input == ".":
+    english_text = decrypt_from_morse_code(user_input)
+    print("English text:", english_text)
+else:
+    print("Invalid input. Please enter only English text or Morse code.")
